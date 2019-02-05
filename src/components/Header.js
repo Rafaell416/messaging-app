@@ -5,14 +5,14 @@ import {
   Platform,
   StyleSheet
 } from 'react-native'
-import { Constants } from 'expo'
+import { Constants, LinearGradient } from 'expo'
 import PropTypes from 'prop-types'
 
 const HEIHGT = Platform.OS === 'ios' ? 50 : 56
 
 function Header ({ title, leftIcon, rightIcon, children }) {
   return (
-    <View>
+    <LinearGradient colors={['#ac8bfa', '#636cf9']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
       <View style={styles.statusBar}></View>
       <View style={styles.container}>
         <View style={styles.iconView}>
@@ -25,7 +25,7 @@ function Header ({ title, leftIcon, rightIcon, children }) {
           { rightIcon }        
         </View>
       </View>
-    </View>
+    </LinearGradient>
   )
 }
 
@@ -40,13 +40,11 @@ const styles = StyleSheet.create({
   container: {
     height: HEIHGT,
     width: '100%',
-    backgroundColor: "#927AF8",
     elevation: 5,
     flexDirection: 'row',
   },
   statusBar: {
     height: Constants.statusBarHeight,
-    backgroundColor: "#927AF8"
   },
   iconView: {
     height: HEIHGT,
