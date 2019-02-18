@@ -3,7 +3,7 @@ import {
   View,
   Text,
   Platform,
-  StyleSheet
+  StyleSheet,
 } from 'react-native'
 import { Constants, LinearGradient } from 'expo'
 import PropTypes from 'prop-types'
