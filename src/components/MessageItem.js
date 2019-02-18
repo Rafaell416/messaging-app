@@ -9,9 +9,10 @@ import {
 import PropTypes from 'prop-types'
 import moment from 'moment'
 
-function MessageItem ({ avatar, id, username, lastMessages, date }) {
+function MessageItem ( props ) {
+  const { avatar, username, lastMessages, date, onPress } = props
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity onPress={() => onPress( props ) } style={styles.container}>
       <View style={styles.avatarContainer}>
         <View style={styles.avatarView}>
           <Image source={{ uri: avatar }} fadeDuratio={0} style={styles.avatar}/>

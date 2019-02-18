@@ -40,6 +40,8 @@ class Home extends Component {
     header: <Header title="Home" />
   }
 
+  _handleMessageItemPress = ( chat ) => this.props.navigation.navigate('Chat', { chat })
+
   _keyExtractor = (item) => item.id
 
   render () {
@@ -47,7 +49,7 @@ class Home extends Component {
       <View style={styles.container}>
         <FlatList 
           data={ this.state.messages }
-          renderItem={({ item }) => <MessageItem key={ item.di } { ...item }/>}
+          renderItem={({ item }) => <MessageItem key={ item.di } { ...item } onPress={ this._handleMessageItemPress } />}
           keyExtractor={ this._keyExtractor }
         />
       </View>
