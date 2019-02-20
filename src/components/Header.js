@@ -6,6 +6,7 @@ import {
   StyleSheet,
 } from 'react-native'
 import { Constants, LinearGradient } from 'expo'
+import Status from '../components/Status'
 import PropTypes from 'prop-types'
 
 const HEIHGT = Platform.OS === 'ios' ? 50 : 56
@@ -13,7 +14,8 @@ const HEIHGT = Platform.OS === 'ios' ? 50 : 56
 function Header ({ title, leftIcon, rightIcon, children }) {
   return (
     <LinearGradient colors={['#ac8bfa', '#636cf9']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
-      <View style={styles.statusBar}></View>
+      <Status />
+      {/* <View style={styles.statusBar}></View> */}
       <View style={styles.container}>
         <View style={styles.iconView}>
           { leftIcon }        
