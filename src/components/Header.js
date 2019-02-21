@@ -15,7 +15,6 @@ function Header ({ title, leftIcon, rightIcon, children }) {
   return (
     <LinearGradient colors={['#ac8bfa', '#636cf9']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
       <Status />
-      {/* <View style={styles.statusBar}></View> */}
       <View style={styles.container}>
         <View style={styles.iconView}>
           { leftIcon }        

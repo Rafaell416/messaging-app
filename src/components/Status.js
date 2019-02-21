@@ -1,7 +1,9 @@
 import React from 'react'
 import {
   NetInfo,
+  Alert,
   StatusBar,
+  Platform,
   Text,
   View,
   StyleSheet
