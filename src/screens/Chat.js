@@ -7,9 +7,12 @@ import {
 } from 'react-native'
 import Header from '../components/Header'
 import { Ionicons } from '@expo/vector-icons'
-import PropTypes from 'prop-types'
 import MessageList from '../components/MessageList'
-import { createTextMessage } from '../utils/MessageUtils'
+import { 
+  createTextMessage, 
+  createImageMessage,
+  createLocationMessage
+} from '../utils/MessageUtils'
 
 class Chat extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -27,27 +30,38 @@ class Chat extends Component {
 
   state = {
     messages: [
-      createTextMessage("Hola, ¿ Qué haces ?"),
+      createTextMessage("Hola, ¿Qué haces?"),
       createTextMessage("Turiano el buen amigo"),
+      createImageMessage('https://www.tesla.com/sites/default/files/images/roadster/roadster-social.jpg'),
       createTextMessage("Hola"),
       createTextMessage("Mundo"),
-    ]
+      createLocationMessage({
+        latitude: 10.9685400,
+        longitude: -74.7813200,
+      })
+    ],
+    selectedMessages: {}
+  }
+
+  _handlePressMessage = item => {
+    this.setState({
+      selectedMessages: {
+        [item.id]: true
+      }
+    })
   }
 
   render () {
     return (
       <View style={styles.container}>
         <MessageList 
+          selectedMessages={ this.state.selectedMessages }
           messages={ this.state.messages }
-          onMessagePress={() => null}
+          onMessagePress={ this._handlePressMessage }
         />
       </View>
     )
   }
-}
-
-Chat.propTypes = {
-
 }
 
 const styles = StyleSheet.create({
