@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import {
   View,
-  Text,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  KeyboardAvoidingView
 } from 'react-native'
 import Header from '../components/Header'
 import { Ionicons } from '@expo/vector-icons'
 import MessageList from '../components/MessageList'
+import Toolbar from '../components/Toolbar'
 import { 
   createTextMessage, 
   createImageMessage,
@@ -51,6 +52,8 @@ class Chat extends Component {
     })
   }
 
+  _handleSubmitMessage = () => null
+
   render () {
     return (
       <View style={styles.container}>
@@ -58,6 +61,9 @@ class Chat extends Component {
           selectedMessages={ this.state.selectedMessages }
           messages={ this.state.messages }
           onMessagePress={ this._handlePressMessage }
+        />
+        <Toolbar 
+          onSubmit={ this._handleSubmitMessage }
         />
       </View>
     )

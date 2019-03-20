@@ -5,7 +5,8 @@ import {
   StyleSheet,
   FlatList,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  TouchableWithoutFeedback
 } from 'react-native'
 import moment from 'moment'
 import PropTypes from 'prop-types'
@@ -20,7 +21,6 @@ class MessageList extends Component {
   _keyExtractor = item => item.id.toString() 
 
   _renderItem = ({ item, index }) => {
-    const { onMessagePress } = this.props 
     return (
       <View style={styles.messageRow}>
         <TouchableOpacity key={ item.id } onPress={() => this._handlePressMessage( item )}>
@@ -34,7 +34,7 @@ class MessageList extends Component {
     this.setState({
       selectedMessages: {
         ...this.state.selectedMessages,
-        [item.id]: true
+        [item.id]: !this.state.selectedMessages[item.id]
       }
     })
   }
