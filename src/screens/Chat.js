@@ -3,7 +3,6 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
-  KeyboardAvoidingView
 } from 'react-native'
 import Header from '../components/Header'
 import { Ionicons } from '@expo/vector-icons'
@@ -14,6 +13,10 @@ import {
   createImageMessage,
   createLocationMessage
 } from '../utils/MessageUtils'
+
+import { addMessage } from '../redux/actions'
+
+import { connect } from 'react-redux'
 
 class Chat extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -30,17 +33,6 @@ class Chat extends Component {
   })  
 
   state = {
-    messages: [
-      createTextMessage("Hola, ¿Qué haces?"),
-      createTextMessage("Turiano el buen amigo"),
-      createImageMessage('https://www.tesla.com/sites/default/files/images/roadster/roadster-social.jpg'),
-      createTextMessage("Hola"),
-      createTextMessage("Mundo"),
-      createLocationMessage({
-        latitude: 10.9685400,
-        longitude: -74.7813200,
-      })
-    ],
     selectedMessages: {}
   }
 
@@ -52,14 +44,20 @@ class Chat extends Component {
     })
   }
 
-  _handleSubmitMessage = () => null
+  _handleSubmitMessage = message => {
+    const textMessage = createTextMessage(message)
+    this.props.addMessage( textMessage )
+  }
+
+  // es5 this.state.messages.concat(createTextMessage(message))
+  //es6 [createTextMessage(message), ...this.state.messages]
 
   render () {
     return (
       <View style={styles.container}>
         <MessageList 
           selectedMessages={ this.state.selectedMessages }
-          messages={ this.state.messages }
+          messages={ this.props.messages }
           onMessagePress={ this._handlePressMessage }
         />
         <Toolbar 
@@ -83,4 +81,12 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Chat
+const mapStateToProps = ({ messages }) => ({
+  messages
+})
+
+const mapDispatchToProps = {
+  addMessage
+}
+
+export default connect( mapStateToProps, mapDispatchToProps )( Chat )
