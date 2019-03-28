@@ -81,12 +81,8 @@ const styles = StyleSheet.create({
   }
 })
 
-const mapStateToProps = ({ messages }) => ({
-  messages
-})
+const mapStateToProps = (state) => ({ messages: state.messages })
 
-const mapDispatchToProps = {
-  addMessage
-}
+const mapDispatchToProps = { addMessage }
 
 export default connect( mapStateToProps, mapDispatchToProps )( Chat )

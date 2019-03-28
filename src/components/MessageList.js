@@ -5,7 +5,7 @@ import {
   StyleSheet,
   FlatList,
   Image,
-  TouchableOpacity,
+  Alert,
   TouchableWithoutFeedback
 } from 'react-native'
 import moment from 'moment'
@@ -23,11 +23,24 @@ class MessageList extends Component {
   _renderItem = ({ item, index }) => {
     return (
       <View style={styles.messageRow}>
-        <TouchableOpacity key={ item.id } onPress={() => this._handlePressMessage( item )}>
-          { this._renderMessageBody({ item, index }) }
-        </TouchableOpacity>
+        <TouchableWithoutFeedback key={ item.id } onPress={() => this._handlePressMessage( item )} onLongPress={ this._handleDeleteMessage }>
+          <View>
+            { this._renderMessageBody({ item, index }) }
+          </View>
+        </TouchableWithoutFeedback>
       </View>
     )
+  }
+
+  _handleDeleteMessage = () => {
+    Alert.alert('Alerta', '¿ Quieres eliminar este mensaje ?', [
+      {
+        text: 'No',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      {text: 'Si', onPress: () => console.log('OK Pressed')},
+    ])
   }
 
   _handlePressMessage = item => {

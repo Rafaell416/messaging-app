@@ -6,7 +6,7 @@ import {
   createLocationMessage
 } from '../utils/MessageUtils'
 
-function reducer (state = { 
+const initialState = { 
   messages: [
     createTextMessage("Hola, ¿Qué haces?"),
     createTextMessage("Turiano el buen amigo"),
@@ -18,7 +18,9 @@ function reducer (state = {
       longitude: -74.7813200,
     })
   ]
-}, action) {
+}
+
+function reducer (state = initialState, action) {
   switch (action.type) {
     case 'ADD_MESSAGE':
       return {
