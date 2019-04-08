@@ -40,7 +40,18 @@ class Toolbar extends Component {
       this.props.onSubmit({ type: 'image', message: image })
     }
   }
-  
+
+  _handleTakePhoto = async () => {
+    const { status } = await Permissions.askAsync(Permissions.CAMERA)
+    if ( status !== 'granted' ) {
+      Alert.alert('Warning', 'We need to access your camera.')
+    } else {
+      const result = await ImagePicker.launchCameraAsync({ allowsEditing: true })
+      const image = result.uri
+      this.props.onSubmit({ type: 'image', message: image })
+    }
+  }
+
   render () {
     const { text } = this.state
     return (
@@ -67,7 +78,7 @@ class Toolbar extends Component {
           cancelButtonIndex={2}
           onPress={(index) => {
             if ( index === 0 ) {
-              // open camera
+              this._handleTakePhoto()
             } else if ( index === 1 ) {
               this._handleOpenPhotoLibrary()
             }
