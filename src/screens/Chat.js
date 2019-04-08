@@ -44,9 +44,22 @@ class Chat extends Component {
     })
   }
 
-  _handleSubmitMessage = message => {
-    const textMessage = createTextMessage(message)
-    this.props.addMessage( textMessage )
+  _handleSubmitMessage = ({ type, message }) => {
+    switch ( type ) {
+      case 'image':
+        const imageMessage = createImageMessage(message)
+        this.props.addMessage( imageMessage )
+        break
+      case 'text':
+        const textMessage = createTextMessage(message)
+        this.props.addMessage( textMessage )
+        break
+      case 'location':
+        console.log('type: ', type, 'message:', message)
+        break
+      default:
+        return type
+    }
   }
 
   // es5 this.state.messages.concat(createTextMessage(message))

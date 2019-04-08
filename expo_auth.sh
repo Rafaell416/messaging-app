@@ -1,0 +1,1 @@
+expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD --non-interactive
